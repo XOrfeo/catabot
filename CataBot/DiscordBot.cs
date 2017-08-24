@@ -53,7 +53,7 @@ namespace CataBot
         public string token = Program.config[0];
         // Grab the provided prefix
         private char prefix = Program.config[1].ToCharArray()[0];
-        // Initialise the shitpost blacklist.
+        // Initialise the image blacklist.
         public List<string> blacklist = new List<string>();
         // Initialise the soundbyte queue.
         public List<string> queue = new List<string>();
@@ -132,7 +132,7 @@ namespace CataBot
                         "        whois <user> : display <user>'s role on the server.\n" +
                         "help <command group> : display help for specified command group.\n" +
                         "         list groups : list the command groups.\n" +
-                        "         synchronise : sync the shitposts & soundbytes with the Google Drive (Admin/OG FKTS only).\n" +
+                        "         synchronise : sync the images & soundbytes with the Google Drive (Admin/OG FKTS only).\n" +
                         "           changelog : show changelog.```");
                 }
                 // If beer commands are specified, add them to the help text.
@@ -151,10 +151,10 @@ namespace CataBot
                         "view <event> : display more information about <event>.```");
                 }
                 // If shitposting commands are specified, add them to the help text.
-                if (args.Contains("shitpost"))
+                if (args.Contains("image"))
                 {
-                    helptext.Add("**Shitpost**");
-                    helptext.Add("```      shitpost : send a random shitpost.\n" +
+                    helptext.Add("**Random Image**");
+                    helptext.Add("```         image : send a random shitpost.\n" +
                         "     blacklist : display the current blacklist\n" +
                         "clearblacklist : clear the shitpost blacklist.```");
                 }
@@ -229,26 +229,6 @@ namespace CataBot
                 await e.Channel.SendMessage($"CataBot v4, a Discord Bot made by Catalan.\n" +
                     $"v4 adds Google Drive interaction.");
             });
-            // Command to display the author and status of this bot.
-            commands.CreateCommand("changelog").Do(async (e) =>
-            {
-                // Command displays the bot info.
-                // Delete the command message.
-                await e.Message.Delete();
-                // Notes the command being issued and who issued it into the terminal.
-                Console.WriteLine($"[{e.Server}] Changelog shown for {e.User.Name}");
-                // Sends the information back to the channel
-                await e.Channel.SendMessage($"*Changelog:*\n" +
-                    $"``` 9/7 v1   - Basic Functionality & user interaction.\n" +
-                    $"14/7 v2   - Added soundboard.\n" +
-                    $"31/7 v3   - Added Google Calendar support.\n" +
-                    $" 9/8 v3.5 - Reworked internal structure.\n" +
-                    $"          - Improved usability.\n" +
-                    $"          - Merged with BeerBot.\n" +
-                    $"19/8 v4   - Added Google Drive support.\n" +
-                    $"          - Bug fixes.\n" +
-                    $"          - Removed Herobrine.```");
-            });
             commands.CreateCommand("list").Parameter("args", ParameterType.Required).Do(async (e) =>
              {
                  // Command lists the sounbytes or command groups
@@ -310,7 +290,7 @@ namespace CataBot
                         List<Google.Apis.Drive.v3.Data.File> iFiles = drive.GetFiles(driveService, imageExtensions);
                         List<Google.Apis.Drive.v3.Data.File> sFiles = drive.GetFiles(driveService, soundExtensions);
                         // Synchronise the folders.
-                        drive.syncFiles(driveService, iFiles, "shitposts/", e.Channel);
+                        drive.syncFiles(driveService, iFiles, "images/", e.Channel);
                         drive.syncFiles(driveService, sFiles, "sounds/", e.Channel);
                         await e.Channel.SendMessage("GDrive synchronisation complete.");
                         Console.WriteLine($"[{e.Server}] Synchronised with GDrive ({e.User.Name})");
@@ -342,45 +322,6 @@ namespace CataBot
                 else
                 {
                     await e.Channel.SendMessage($"**YOU DO NOT HAVE ENOUGH BADGES TO TRAIN ME** {e.User.Mention}");
-                }
-            });
-            commands.CreateCommand("deusvult").Do(async (e) =>
-            {
-                // DEUS VULT.
-                // Delete the command message.
-                await e.Message.Delete();
-                // DEUS VULT.
-                await e.Channel.SendMessage("***DEUS VULT***");
-            });
-            commands.CreateCommand("prefix").Parameter("arg",ParameterType.Required).Do(async (e) =>
-            {
-                // Delete the command message.
-                await e.Message.Delete();
-                // Specificy the roles need to issue this command,
-                string[] reqRoles = { "Admin", "OG FKTS" };
-                // If the user has the required permissions, execute the command as normal.
-                if (reqRoles.Any(s => e.User.Roles.Any(r => r.Name.Contains(s))))
-                {
-                    // If the prefix is allowed.
-                    if (allowedPrefixes.Contains(e.Args[0].ToCharArray()[0]))
-                    {
-                        // Inform the user that the prefix has been changed and change it.
-                        await e.Channel.SendMessage($"Prefix changed to `{e.Args[0].ToCharArray()[0].ToString()}`");
-                        prefix = e.Args[0].ToCharArray()[0];
-                        // Re-initialise the command system.
-                        client.UsingCommands(xyz =>
-                        {
-                            // Set prefix character so that the bot knows what to look for.
-                            xyz.PrefixChar = prefix;
-                            xyz.AllowMentionPrefix = true;
-                        });
-                        commands = client.GetService<CommandService>();
-                    }
-                    else
-                    {
-                        // Inform the user that their choice is invalid.
-                        await e.Channel.SendMessage($"Invalid prefix: `{e.Args[0].ToCharArray()[0].ToString()}`");
-                    }
                 }
             });
             /*
@@ -662,22 +603,22 @@ namespace CataBot
                 queue.Clear();
             });
             /*
-            ███████╗██╗  ██╗██╗████████╗██████╗  ██████╗ ███████╗████████╗
-            ██╔════╝██║  ██║██║╚══██╔══╝██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝
-            ███████╗███████║██║   ██║   ██████╔╝██║   ██║███████╗   ██║   
-            ╚════██║██╔══██║██║   ██║   ██╔═══╝ ██║   ██║╚════██║   ██║   
-            ███████║██║  ██║██║   ██║   ██║     ╚██████╔╝███████║   ██║   
-            ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝      ╚═════╝ ╚══════╝   ╚═╝    
+            ██╗███╗   ███╗ █████╗  ██████╗ ███████╗███████╗
+			██║████╗ ████║██╔══██╗██╔════╝ ██╔════╝██╔════╝
+			██║██╔████╔██║███████║██║  ███╗█████╗  ███████╗
+			██║██║╚██╔╝██║██╔══██║██║   ██║██╔══╝  ╚════██║
+			██║██║ ╚═╝ ██║██║  ██║╚██████╔╝███████╗███████║
+			╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝
             */
-            commands.CreateCommand("shitpost").Do(async (e) =>
+            commands.CreateCommand("image").Do(async (e) =>
             {
                 // Command send a random shitpost to the text channel.
                 // Delete the command message.
                 await e.Message.Delete();
                 // Inform the user that the shitpost is being sent
-                await e.Channel.SendMessage($"Shitposting for {e.User.Mention}");
+                await e.Channel.SendMessage($"Sending random image for {e.User.Mention}");
                 // Get all the filenames of the correct filetype from the google drive.
-                string[] files = Directory.GetFiles(location + "shitposts/");
+                string[] files = Directory.GetFiles(location + "images/");
                 // Initialise a string to hold the file.
                 string chosenfile = null;
                 do
@@ -695,12 +636,12 @@ namespace CataBot
                             // Send the file.
                             await e.Channel.SendFile(chosenfile);
                             // Inform the console.
-                            Console.WriteLine($"[{e.Server}] Shitposting ('{chosenfile.Substring(chosenfile.LastIndexOf('/') + 1)}') for {e.User.Name}");
+                            Console.WriteLine($"[{e.Server}] Sending random image ('{chosenfile.Substring(chosenfile.LastIndexOf('/') + 1)}') for {e.User.Name}");
                         }
                         catch
                         {
                             // Inform the console.
-                            Console.WriteLine($"[{e.Server}] Shitposting failure. Failed to send '{chosenfile.Substring(chosenfile.LastIndexOf('/') + 1)}' for {e.User.Name}");
+                            Console.WriteLine($"[{e.Server}] Sending random image failure. Failed to send '{chosenfile.Substring(chosenfile.LastIndexOf('/') + 1)}' for {e.User.Name}");
                         }
                         break;
                     }
@@ -738,7 +679,7 @@ namespace CataBot
                 // Delete the command message.
                 await e.Message.Delete();
                 // Inform the user the blacklist is being cleared.
-                await e.Channel.SendMessage($"Clearing shitpost blacklist for {e.User.Mention}");
+                await e.Channel.SendMessage($"Clearing random image blacklist for {e.User.Mention}");
                 // Clear the blacklist.
                 blacklist.Clear();
                 // Inform the console of the command.
