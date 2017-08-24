@@ -79,3 +79,45 @@ E:\Documents\Visual Studio 2017\Projects\CataBot\CataBot\obj\Debug\CataBot.exe
 E:\Documents\Visual Studio 2017\Projects\CataBot\CataBot\obj\Debug\CataBot.pdb
 E:\Documents\Visual Studio 2017\Projects\CataBot\CataBot\bin\Debug\Google.Apis.Drive.v3.dll
 E:\Documents\Visual Studio 2017\Projects\CataBot\CataBot\bin\Debug\Google.Apis.Drive.v3.xml
+E:\GitHub\catabot\CataBot\obj\Debug\CataBot.csprojResolveAssemblyReference.cache
+E:\GitHub\catabot\CataBot\obj\Debug\CataBot.csproj.CoreCompileInputs.cache
+E:\GitHub\catabot\CataBot\obj\Debug\CataBot.exe
+E:\GitHub\catabot\CataBot\obj\Debug\CataBot.pdb
+E:\GitHub\catabot\CataBot\bin\Debug\CataBot.exe.config
+E:\GitHub\catabot\CataBot\bin\Debug\CataBot.exe
+E:\GitHub\catabot\CataBot\bin\Debug\CataBot.pdb
+E:\GitHub\catabot\CataBot\bin\Debug\Discord.Net.Audio.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Discord.Net.Commands.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Discord.Net.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Auth.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Calendar.v3.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Core.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Drive.v3.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.PlatformServices.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.GData.AccessControl.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.GData.Calendar.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.GData.Client.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.GData.Extensions.dll
+E:\GitHub\catabot\CataBot\bin\Debug\NAudio.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Newtonsoft.Json.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Nito.AsyncEx.Concurrent.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Nito.AsyncEx.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Nito.AsyncEx.Enlightenment.dll
+E:\GitHub\catabot\CataBot\bin\Debug\RestSharp.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Supremes.dll
+E:\GitHub\catabot\CataBot\bin\Debug\WebSocket4Net.dll
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Auth.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Calendar.v3.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Core.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Google.Apis.Drive.v3.xml
+E:\GitHub\catabot\CataBot\bin\Debug\NAudio.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Newtonsoft.Json.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Nito.AsyncEx.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Nito.AsyncEx.Concurrent.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Nito.AsyncEx.Enlightenment.xml
+E:\GitHub\catabot\CataBot\bin\Debug\RestSharp.xml
+E:\GitHub\catabot\CataBot\bin\Debug\Supremes.pdb
+E:\GitHub\catabot\CataBot\bin\Debug\Supremes.xml

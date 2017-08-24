@@ -230,45 +230,44 @@ namespace CataBot
                     $"v4 adds Google Drive interaction.");
             });
             commands.CreateCommand("list").Parameter("args", ParameterType.Required).Do(async (e) =>
-             {
-                 // Command lists the sounbytes or command groups
-                 // Delete the command message.
-                 await e.Message.Delete();
-                 // Inform the user that their list will be shown.
-                 await e.Channel.SendMessage($"List shown for {e.User.Mention}");
-                 // Display the correct list.
-                 if (e.GetArg("args").ToLower() == "sounds")
-                 {
-                     // List the available soundbytes to the text channel.
-                     await e.Channel.SendMessage($"*Available soundbytes:*");
-                     await e.Channel.SendMessage($"```    thisiswar : Arma3 This Is War" +
-                            $"\n        moron : Call someone a moron in the voice of Aterfax (ft. Darragh)" +
-                            $"\n     timallen : Tim Allen grunt" +
-                            $"\n       cookie : PUT THAT COOKIE DOWN" +
-                            $"\n     jumpdown : Jump down and say some fucking gay shit" +
-                            $"\n        hakey : suck yourself!" +
-                            $"\n  dormanthake : George Attenborough observes Hake's nature" +
-                            $"\n         uwot : I'll fight you```");
-                     Console.WriteLine($"[{e.Server}] Soundbyte list shown for {e.User.Name}");
-                 }
-                 else if (e.GetArg("args").ToLower() == "groups")
-                 {
-                     // Display what the command groups are to the text channel.
-                     await e.Channel.SendMessage($"*Command Groups:*");
-                     await e.Channel.SendMessage($"```null" +
-                         $"\nGeneral" +
-                         $"\nBeer" +
-                         $"\nEvents" +
-                         $"\nShitpost" +
-                         $"\nSound```");
-                     Console.WriteLine($"[{e.Server}] Command groups shown for {e.User.Name}");
-                 }
-                 else
-                 {
-                     // Inform the user if the specified list does not exist.
-                     await e.Channel.SendMessage($"{e.User.Mention} that list doesn't exist!");
-                 }
-             });
+            {
+                // Command lists the sounbytes or command groups
+                // Delete the command message.
+                await e.Message.Delete();
+                // Inform the user that their list will be shown.
+                await e.Channel.SendMessage($"List shown for {e.User.Mention}");
+                // Display the correct list.
+                if (e.GetArg("args").ToLower() == "sounds")
+                {
+                    // List the available soundbytes to the text channel.
+                    await e.Channel.SendMessage($"*Available soundbytes:*");
+                    string[] sounds = Directory.GetFiles(location + "sounds/");
+                    for (int i = 0; i < sounds.Length; i++)
+                    {
+                        sounds[i] = sounds[i].Substring(sounds[i].LastIndexOf('/') + 1);
+                        sounds[i] = sounds[i].Substring(0, sounds[i].IndexOf(".mp3"));
+                    }
+                    await e.Channel.SendMessage($"```{string.Join("\n", sounds)}```");
+                    Console.WriteLine($"[{e.Server}] Soundbyte list shown for {e.User.Name}");
+                }
+                else if (e.GetArg("args").ToLower() == "groups")
+                {
+                    // Display what the command groups are to the text channel.
+                    await e.Channel.SendMessage($"*Command Groups:*");
+                    await e.Channel.SendMessage($"```null" +
+                        $"\nGeneral" +
+                        $"\nBeer" +
+                        $"\nEvents" +
+                        $"\nImages" +
+                        $"\nSound```");
+                    Console.WriteLine($"[{e.Server}] Command groups shown for {e.User.Name}");
+                }
+                else
+                {
+                    // Inform the user if the specified list does not exist.
+                    await e.Channel.SendMessage($"{e.User.Mention} that list doesn't exist!");
+                }
+            });
             commands.CreateCommand("synchronise").Alias(new string[] { "sync" }).Do(async (e) =>
             {
                 // Command send a random shitpost to the text channel.
