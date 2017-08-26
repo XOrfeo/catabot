@@ -15,33 +15,6 @@ using System.Net;
 
 namespace CataBot
 {
-    public class bot
-    {
-        // Define the allowed prefixes.
-        private char[] allowedPrefixes = { '$', '!', '~', '>', '<', '|' };
-        // Store default prefix.
-        private char prefix = '$';
-        // Public char to store the prefix character
-        public char Prefix
-        {
-            get
-            {
-                return prefix;
-            }
-            set
-            {
-                // If the config-defined prefix is not allowed, assume the default.
-                if (allowedPrefixes.Contains(value))
-                {
-                    prefix = value;
-                }
-                else
-                {
-                    prefix = allowedPrefixes[0];
-                }
-            }
-        }
-    }
     public class DiscordBot
     {
         // Public bools to store whether or not audio is currently being sent or if the *current* audio file is bad.
@@ -49,10 +22,26 @@ namespace CataBot
         public bool badfile = new bool();
         // Define the allowed prefixes.
         private char[] allowedPrefixes = { '$', '!', '~', '>', '<', '|' };
+        // Default prefix.
+        private char Prefix = '$';
+        // Public char to store the prefix character
+        public char prefix
+        {
+            get
+            {
+                return Prefix;
+            }
+            set
+            {
+                // If the config-defined prefix is allowed.
+                if (allowedPrefixes.Contains(value))
+                {
+                    Prefix = value;
+                }
+            }
+        }
         // Grab the bot token.
         public string token = Program.config[0];
-        // Grab the provided prefix
-        private char prefix = Program.config[1].ToCharArray()[0];
         // Initialise the image blacklist.
         public List<string> blacklist = new List<string>();
         // Initialise the soundbyte queue.
@@ -75,11 +64,8 @@ namespace CataBot
             });
             // Display the log message to the terminal.
             client.Log.Message += (s, e) => Console.WriteLine($"[{e.Severity}] {e.Source} { e.Message}");
-            // If the config prefix is not allowed, assume the default.
-            if (!allowedPrefixes.Contains(prefix))
-            {
-                prefix = allowedPrefixes[0];
-            }
+            // Grab the provided prefix
+            prefix = Program.config[1].ToCharArray()[0];
             // Configure the command structure.
             client.UsingCommands(xyz =>
             {
